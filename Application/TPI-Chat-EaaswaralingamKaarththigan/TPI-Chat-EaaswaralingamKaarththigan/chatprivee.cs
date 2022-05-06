@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TPI_Chat_EaaswaralingamKaarththigan
 {
-    public partial class Form1 : Form
+    public partial class chatprivee : Form
     {
-        public Form1()
+        public chatprivee()
         {
             InitializeComponent();
         }
