@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.btnEnvoyer = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtMessage = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDiscPubliques = new System.Windows.Forms.Button();
+            this.btnDiscPrivees = new System.Windows.Forms.Button();
+            this.btnParametres = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,13 +50,14 @@
             this.btnEnvoyer.TabIndex = 1;
             this.btnEnvoyer.Text = "Envoyer";
             this.btnEnvoyer.UseVisualStyleBackColor = false;
+            this.btnEnvoyer.Click += new System.EventHandler(this.btnEnvoyer_Click);
             // 
-            // textBox1
+            // txtMessage
             // 
-            this.textBox1.Location = new System.Drawing.Point(225, 397);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(686, 20);
-            this.textBox1.TabIndex = 2;
+            this.txtMessage.Location = new System.Drawing.Point(225, 397);
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.Size = new System.Drawing.Size(686, 20);
+            this.txtMessage.TabIndex = 2;
             // 
             // listView1
             // 
@@ -86,51 +86,43 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Canaux publics";
             // 
-            // button1
+            // btnDiscPubliques
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Enabled = false;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-            this.button1.Location = new System.Drawing.Point(12, 479);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(296, 58);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Discussions publiques";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnDiscPubliques.BackColor = System.Drawing.Color.White;
+            this.btnDiscPubliques.Enabled = false;
+            this.btnDiscPubliques.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDiscPubliques.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
+            this.btnDiscPubliques.Location = new System.Drawing.Point(12, 479);
+            this.btnDiscPubliques.Name = "btnDiscPubliques";
+            this.btnDiscPubliques.Size = new System.Drawing.Size(296, 58);
+            this.btnDiscPubliques.TabIndex = 6;
+            this.btnDiscPubliques.Text = "Discussions publiques";
+            this.btnDiscPubliques.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnDiscPrivees
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-            this.button2.Location = new System.Drawing.Point(314, 479);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(296, 58);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Discussions privées";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnDiscPrivees.BackColor = System.Drawing.Color.White;
+            this.btnDiscPrivees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDiscPrivees.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
+            this.btnDiscPrivees.Location = new System.Drawing.Point(314, 479);
+            this.btnDiscPrivees.Name = "btnDiscPrivees";
+            this.btnDiscPrivees.Size = new System.Drawing.Size(296, 58);
+            this.btnDiscPrivees.TabIndex = 7;
+            this.btnDiscPrivees.Text = "Discussions privées";
+            this.btnDiscPrivees.UseVisualStyleBackColor = false;
+            this.btnDiscPrivees.Click += new System.EventHandler(this.btnDiscPrivees_Click);
             // 
-            // button3
+            // btnParametres
             // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-            this.button3.Location = new System.Drawing.Point(616, 479);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(296, 58);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Paramètres";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(899, 461);
-            this.panel1.TabIndex = 9;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.btnParametres.BackColor = System.Drawing.Color.White;
+            this.btnParametres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnParametres.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
+            this.btnParametres.Location = new System.Drawing.Point(616, 479);
+            this.btnParametres.Name = "btnParametres";
+            this.btnParametres.Size = new System.Drawing.Size(296, 58);
+            this.btnParametres.TabIndex = 8;
+            this.btnParametres.Text = "Paramètres";
+            this.btnParametres.UseVisualStyleBackColor = false;
             // 
             // chatpublic
             // 
@@ -139,19 +131,21 @@
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(923, 549);
             this.ControlBox = false;
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnParametres);
+            this.Controls.Add(this.btnDiscPrivees);
+            this.Controls.Add(this.btnDiscPubliques);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.btnEnvoyer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "chatpublic";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Chat";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -162,14 +156,13 @@
 
         #endregion
         private System.Windows.Forms.Button btnEnvoyer;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnDiscPubliques;
+        private System.Windows.Forms.Button btnDiscPrivees;
+        private System.Windows.Forms.Button btnParametres;
     }
 }
 

@@ -10,26 +10,19 @@ using System.Windows.Forms;
 
 namespace TPI_Chat_EaaswaralingamKaarththigan
 {
-    public partial class chatpublic : Form
+    public partial class mainform : Form
     {
-        public chatpublic()
+        public mainform()
         {
             InitializeComponent();
+            chatpublic screenschatprivee = new chatpublic { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            this.panel1.Controls.Add(screenschatprivee);
+            screenschatprivee.Show();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void mainform_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnDiscPrivees_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnEnvoyer_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

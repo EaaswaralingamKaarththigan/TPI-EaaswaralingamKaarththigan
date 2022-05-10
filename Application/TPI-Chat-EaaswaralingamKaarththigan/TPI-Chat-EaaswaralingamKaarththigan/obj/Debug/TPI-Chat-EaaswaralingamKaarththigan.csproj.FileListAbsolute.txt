@@ -8,3 +8,5 @@ C:\Users\Kaarththigan.EAASWAR\source\repos\TPI-Chat-EaaswaralingamKaarththigan\T
 C:\Users\Kaarththigan.EAASWAR\source\repos\TPI-Chat-EaaswaralingamKaarththigan\TPI-Chat-EaaswaralingamKaarththigan\obj\Debug\TPI-Chat-EaaswaralingamKaarththigan.pdb
 C:\Users\Kaarththigan.EAASWAR\source\repos\TPI-Chat-EaaswaralingamKaarththigan\TPI-Chat-EaaswaralingamKaarththigan\obj\Debug\TPI_Chat_EaaswaralingamKaarththigan.chatpublic.resources
 C:\Users\Kaarththigan.EAASWAR\source\repos\TPI-Chat-EaaswaralingamKaarththigan\TPI-Chat-EaaswaralingamKaarththigan\obj\Debug\TPI_Chat_EaaswaralingamKaarththigan.chatprivee.resources
+C:\Users\Kaarththigan.EAASWAR\source\repos\TPI-Chat-EaaswaralingamKaarththigan\TPI-Chat-EaaswaralingamKaarththigan\obj\Debug\TPI_Chat_EaaswaralingamKaarththigan.mainform.resources
+C:\Users\Kaarththigan.EAASWAR\source\repos\TPI-Chat-EaaswaralingamKaarththigan\TPI-Chat-EaaswaralingamKaarththigan\obj\Debug\TPI_Chat_EaaswaralingamKaarththigan.login.resources
