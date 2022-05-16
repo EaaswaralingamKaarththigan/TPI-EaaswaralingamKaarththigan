@@ -44,5 +44,22 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                     MessageBox.Show("Nom d'utilisateur ou/et mot de passe erroné(e)");
             }
         }
+
+        private void txtUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)                  // Si le bouton "enter" est pressé
+            {
+                txtPassword.Focus();                    // Le placement sera dans le textbox Password
+                e.Handled = true;
+            }
+        }
+
+        private void txtPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)                  // Si la touche "enter" est pressé
+            {
+                btnLogin.PerformClick();                // Le bouton login sera appuyé
+            }
+        }
     }
 }
