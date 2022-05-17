@@ -15,26 +15,26 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public mainform()
         {
             InitializeComponent();
-            chatpublic screenschatpublic = new chatpublic(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            chatpublic screenschatpublic = new chatpublic(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };                        // Le programme affiche, dès le lancement, le chat public
             this.panel1.Controls.Add(screenschatpublic);
             screenschatpublic.Show();
         }
 
-        public void discprivee()
+        public void discprivee()                                                                                                                    // Fonction pour afficher le chat privé
         {
             chatprivee screenschatprivee = new chatprivee(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             this.panel1.Controls.Add(screenschatprivee);
             screenschatprivee.Show();
         }
 
-        public void discpubliques()
+        public void discpubliques()                                                                                                                 // Fonction pour afficher le chat public
         {
             chatpublic screenschatpublic = new chatpublic(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             this.panel1.Controls.Add(screenschatpublic);
             screenschatpublic.Show();
         }
 
-        public void parametres()
+        public void parametres()                                                                                                                    // Fonction pour afficher les paramètres
         {
             parametres screensparametres = new parametres(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             this.panel1.Controls.Add(screensparametres);

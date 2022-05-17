@@ -27,8 +27,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void btnDiscPrivees_Click(object sender, EventArgs e)
         {
-            this.Close();
-            mainform.discprivee();
+            this.Close();                                                   // La page du chat public va se fermer
+            mainform.discprivee();                                          // La fonction qui permet d'afficher la page du chat privé est appelée
         }
 
         private void btnEnvoyer_Click(object sender, EventArgs e)
