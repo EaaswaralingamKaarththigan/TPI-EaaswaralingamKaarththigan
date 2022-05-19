@@ -30,12 +30,12 @@
         {
             this.btnEnvoyer = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDiscPubliques = new System.Windows.Forms.Button();
             this.btnDiscPrivees = new System.Windows.Forms.Button();
             this.btnParametres = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,16 +58,6 @@
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.Size = new System.Drawing.Size(686, 20);
             this.txtMessage.TabIndex = 2;
-            // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(225, 54);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(686, 337);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -125,6 +115,14 @@
             this.btnParametres.Text = "Paramètres";
             this.btnParametres.UseVisualStyleBackColor = false;
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(225, 55);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(686, 329);
+            this.listBox1.TabIndex = 9;
+            // 
             // chatpublic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -132,12 +130,12 @@
             this.BackColor = System.Drawing.Color.Linen;
             this.ClientSize = new System.Drawing.Size(923, 549);
             this.ControlBox = false;
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnParametres);
             this.Controls.Add(this.btnDiscPrivees);
             this.Controls.Add(this.btnDiscPubliques);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.btnEnvoyer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -158,12 +156,12 @@
         #endregion
         private System.Windows.Forms.Button btnEnvoyer;
         private System.Windows.Forms.TextBox txtMessage;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDiscPubliques;
         private System.Windows.Forms.Button btnDiscPrivees;
         private System.Windows.Forms.Button btnParametres;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
