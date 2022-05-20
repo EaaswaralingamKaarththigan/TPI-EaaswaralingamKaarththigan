@@ -13,6 +13,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 {
     public partial class chatpublic : Form
     {
+        private Timer timer1;
         private ContextMenuStrip listboxContextMenu;
         SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002");
         public mainform mainform;
@@ -27,16 +28,21 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             listboxContextMenu = new ContextMenuStrip();
             listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             listBox1.ContextMenuStrip = listboxContextMenu;
-
             con.Open();
             SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
+
             while (reader.Read()) 
-            { 
+            {
+                listBox1.ValueMember = "test123123123";
             listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
             }
-
+            listBox1.TopIndex = listBox1.Items.Count - 1;
+            
             con.Close();
+
+            //InitTimer();
+
         }
 
         private void btnDiscPrivees_Click(object sender, EventArgs e)
@@ -45,13 +51,36 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             mainform.discprivee();                                          // La fonction qui permet d'afficher la page du chat privé est appelée
         }
 
+        public void refreshchat(object sender, EventArgs e)
+        {
+            
+            listBox1.Items.Clear();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
+            }
+            listBox1.TopIndex = listBox1.Items.Count - 1;
+            con.Close();
+        }
+
+        public void InitTimer()
+        {
+            timer1 = new Timer();
+            timer1.Tick += new EventHandler(refreshchat);
+            timer1.Interval = 2000; // in miliseconds
+            timer1.Start();
+        }
+
         private void btnEnvoyer_Click(object sender, EventArgs e)
         {
             
             con.Open();
             SqlCommand cmd = new SqlCommand("insert into tblchatpublic values(@Id_Employe,@Nom_ChatPublic,@Message,@Date_envoi_message)", con);
 
-            cmd.Parameters.AddWithValue("@Id_Employe", 1);
+            cmd.Parameters.AddWithValue("@Id_Employe", 2);
             cmd.Parameters.AddWithValue("@Nom_ChatPublic", "Test1");
             cmd.Parameters.AddWithValue("@Message", txtMessage.Text);
             cmd.Parameters.AddWithValue("@Date_envoi_message", DateTime.Now);
@@ -64,7 +93,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             {
                 listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
             }
-                                    
+            listBox1.TopIndex = listBox1.Items.Count - 1;
             con.Close();
 
             txtMessage.Text = string.Empty;
@@ -102,6 +131,11 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                     listboxContextMenu.Show();
                 }
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(listBox1.SelectedItem.ToString());
         }
     }
 }
