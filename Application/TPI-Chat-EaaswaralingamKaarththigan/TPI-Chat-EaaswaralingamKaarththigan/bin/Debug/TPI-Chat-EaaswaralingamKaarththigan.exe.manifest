@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TPI-Chat-EaaswaralingamKaarththigan.exe" size="24576">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TPI-Chat-EaaswaralingamKaarththigan.exe" size="26112">
       <assemblyIdentity name="TPI-Chat-EaaswaralingamKaarththigan" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NmkmRy4jAWnSwTB1ukyk+91n3Ggvo2CNMbeBjok7tvs=</dsig:DigestValue>
+        <dsig:DigestValue>gXwMHT5cOqScXQX6m+40reQOkNg3t9ED5VA7+DobssY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

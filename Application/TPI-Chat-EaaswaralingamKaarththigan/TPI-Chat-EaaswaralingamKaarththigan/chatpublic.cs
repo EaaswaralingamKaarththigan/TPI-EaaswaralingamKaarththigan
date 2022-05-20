@@ -13,6 +13,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 {
     public partial class chatpublic : Form
     {
+        private ContextMenuStrip listboxContextMenu;
         SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002");
         public mainform mainform;
         public chatpublic(mainform mainform)
@@ -23,10 +24,17 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            listboxContextMenu = new ContextMenuStrip();
+            listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
+            listBox1.ContextMenuStrip = listboxContextMenu;
+
             con.Open();
-            SqlCommand cmd = new SqlCommand("select @Id_Employe,@Nom_ChatPublic,@Message,@Date_envoi_message tblchatpublic from tblchatpublic", con);
-            cmd.ExecuteNonQuery();
-            listBox1.Items.Add("@Id_Employe \n @Message \n @Date_envoi_message");
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read()) 
+            { 
+            listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
+            }
 
             con.Close();
         }
@@ -49,18 +57,51 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             cmd.Parameters.AddWithValue("@Date_envoi_message", DateTime.Now);
             cmd.ExecuteNonQuery();
 
-            
-
-            
-
+            listBox1.Items.Clear();
+            SqlCommand cmdd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlDataReader reader = cmdd.ExecuteReader();
+            while (reader.Read())
+            {
+                listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
+            }
+                                    
             con.Close();
 
+            txtMessage.Text = string.Empty;
 
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtMessage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)                  // Si le bouton "enter" est pressé
+            {
+                btnEnvoyer.PerformClick();                // Le bouton envoyer sera appuyé
+            }
+        }
+              
+        private void listboxContextMenu_Opening(object sender, CancelEventArgs e)
+        {
+            //clear the menu and add custom items
+            listboxContextMenu.Items.Clear();
+            listboxContextMenu.Items.Add(string.Format("Edit - {0}", listBox1.SelectedItem.ToString()));
+        }
+
+        private void listBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                //select the item under the mouse pointer
+                listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
+                if (listBox1.SelectedIndex != -1)
+                {
+                    listboxContextMenu.Show();
+                }
+            }
         }
     }
 }
