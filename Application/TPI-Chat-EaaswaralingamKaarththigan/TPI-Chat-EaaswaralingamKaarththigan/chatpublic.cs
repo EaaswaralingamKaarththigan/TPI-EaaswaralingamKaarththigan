@@ -202,15 +202,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         }
 
 
-        //MessageBox.Show(e.ClickedItem.Name.ToString());
-
-
-
-
-        /*MessageBox.Show("test");
-        ListBox lb = (ListBox)sender;
-        Message user = (Message)lb.Items[lb.SelectedIndex];
-        MessageBox.Show(user.Id.ToString());*/
+       
 
 
 
