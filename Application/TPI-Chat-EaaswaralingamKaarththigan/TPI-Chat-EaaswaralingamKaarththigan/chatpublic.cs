@@ -18,6 +18,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002");
         public mainform mainform;
         public int selectedId;
+        public int selectEmployId;
         public chatpublic(mainform mainform)
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             listBox1.ContextMenuStrip = listboxContextMenu;
             con.Open();
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
             MessageBox.Show(mainform.user.user);
             while (reader.Read()) 
@@ -44,8 +45,9 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 string firstname = Convert.ToString(reader["Prenom"]);
                 string username = Convert.ToString(reader["Pseudonyme"]);
                 string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
-                Message message = new Message(lastname,firstname,text,Id,username);
-            listBox1.Items.Add(message);
+                int idemploye = Convert.ToInt32(reader["Id_Employe"]);
+                Message message = new Message(lastname, firstname, text, Id, username, idemploye);
+                listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
             
@@ -59,7 +61,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         {
             listBox1.Items.Clear();
 
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -68,7 +70,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 string firstname = Convert.ToString(reader["Prenom"]);
                 string username = Convert.ToString(reader["Pseudonyme"]);
                 string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
-                Message message = new Message(lastname, firstname, text, Id, username);
+                int idemploye = Convert.ToInt32(reader["Id_Employe"]);
+                Message message = new Message(lastname, firstname, text, Id, username, idemploye);
                 listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
@@ -108,16 +111,6 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         private void btnEnvoyer_Click(object sender, EventArgs e)
         {
             con.Open();
-            SqlCommand cmdd = new SqlCommand("select tblemployes.Id_Employe from tblemployes INNER JOIN tblcompte ON tblemployes.Id_Employe = tblcompte.Id_Employe WHERE tblcompte.Pseudonyme = @username", con);
-            cmdd.Parameters.AddWithValue("@username", mainform.user.user);
-            SqlDataReader reader = cmdd.ExecuteReader();
-            while (reader.Read())
-            {
-                
-            }
-           
-            con.Close();
-            con.Open();
                 SqlCommand cmd = new SqlCommand("insert into tblchatpublic values(@Id_Employe,@Nom_ChatPublic,@Message,@Date_envoi_message)", con);
                 int test = 1;
                 cmd.Parameters.AddWithValue("@Id_Employe", mainform.user.id);
@@ -151,12 +144,20 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
               
         private void listboxContextMenu_Opening(object sender, CancelEventArgs e)
         {
-            //clear the menu and add custom items
-            listboxContextMenu.Items.Clear();
-            listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
-            listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+            if (selectEmployId == mainform.user.id)
+            {
 
-            listboxContextMenu.ItemClicked +=new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
+                //clear the menu and add custom items
+                listboxContextMenu.Items.Clear();
+                listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
+                listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+
+                listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
+            }
+            else
+            {
+                listboxContextMenu.Items.Clear();
+            }
         }
 
         private void listboxContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -208,6 +209,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             ListBox lb = (ListBox)sender;
             Message message = (Message)lb.Items[lb.SelectedIndex];
             selectedId = message.Id;
+            selectEmployId = message.idemploye;
         }
 
 

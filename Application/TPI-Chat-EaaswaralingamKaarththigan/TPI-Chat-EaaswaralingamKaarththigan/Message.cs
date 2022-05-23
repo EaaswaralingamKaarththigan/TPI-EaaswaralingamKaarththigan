@@ -13,15 +13,16 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public string text;
         public int Id;
         public string username;
+        public int idemploye;
 
-        public Message(string lastname, string firstname, string text, int Id, string username)
+        public Message(string lastname, string firstname, string text, int Id, string username, int idemploye)
         {
             this.Id = Id;
             this.lastname = lastname;
             this.firstname = firstname;
             this.text = text;
             this.username = username;
-
+            this.idemploye = idemploye;
         }
 
         public override string ToString()
