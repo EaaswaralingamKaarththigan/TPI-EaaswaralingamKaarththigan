@@ -8,12 +8,19 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 {
     class Message
     {
-        public string Name;
+        public string lastname;
+        public string firstname;
+        public string text;
         public string Id;
 
-        public override string ToString()
+        public Message(string lastname, string firstname, string text)
         {
-            return Name;
+            this.lastname = lastname;
+            this.firstname = firstname;
+            this.text = text;
+
         }
+
+        
     }
 }

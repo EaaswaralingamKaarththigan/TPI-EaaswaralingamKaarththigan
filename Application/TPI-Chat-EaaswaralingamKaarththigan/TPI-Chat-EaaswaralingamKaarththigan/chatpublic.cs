@@ -31,11 +31,15 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             con.Open();
             SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
-
+            MessageBox.Show("test");
             while (reader.Read()) 
             {
-                listBox1.ValueMember = "test123123123";
-            listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
+                string lastname = Convert.ToString(reader["Nom"]);
+                string firstname = Convert.ToString(reader["Prenom"]);
+                string text = Convert.ToString(reader["Message"]);
+                MessageBox.Show(text);
+                Message message = new Message(lastname,firstname,text);
+            listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
             
