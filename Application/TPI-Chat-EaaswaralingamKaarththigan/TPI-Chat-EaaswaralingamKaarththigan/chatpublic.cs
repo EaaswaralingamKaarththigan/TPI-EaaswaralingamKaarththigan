@@ -24,16 +24,17 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             InitializeComponent();
             this.mainform = mainform;
             this.selectedId = -1;
-            
         }
 
-        
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             listboxContextMenu = new ContextMenuStrip();
-            listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             listBox1.ContextMenuStrip = listboxContextMenu;
+            
+
+            
             con.Open();
             SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -52,6 +53,18 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             listBox1.TopIndex = listBox1.Items.Count - 1;
             
             con.Close();
+            if (selectEmployId == mainform.user.id)
+            {
+
+
+                listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
+                listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+            }
+            else
+            {
+                listboxContextMenu.Items.Clear();
+            }
+            listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
 
             //InitTimer();
 
@@ -83,6 +96,23 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         {
             this.Close();                                                   // La page du chat public va se fermer
             mainform.discprivee();                                          // La fonction qui permet d'afficher la page du chat privé est appelée
+        }
+
+        public void opencontextmenu()
+        {
+            //if (selectEmployId == mainform.user.id)
+            //{
+
+                listboxContextMenu.Items.Clear();
+                listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
+                listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+            //}
+            /*else
+            {
+                listboxContextMenu.Items.Clear();
+            }*/
+
+            listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
         }
 
         public void refreshchat(object sender, EventArgs e)
@@ -141,25 +171,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 btnEnvoyer.PerformClick();                // Le bouton envoyer sera appuyé
             }
         }
-              
-        private void listboxContextMenu_Opening(object sender, CancelEventArgs e)
-        {
-            if (selectEmployId == mainform.user.id)
-            {
-
-                //clear the menu and add custom items
-                listboxContextMenu.Items.Clear();
-                listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
-                listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
-
-                listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
-            }
-            else
-            {
-                listboxContextMenu.Items.Clear();
-            }
-        }
-
+             
+        
         private void listboxContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             con.Open();
