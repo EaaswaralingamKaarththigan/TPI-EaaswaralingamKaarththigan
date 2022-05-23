@@ -11,14 +11,20 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public string lastname;
         public string firstname;
         public string text;
-        public string Id;
+        public int Id;
 
-        public Message(string lastname, string firstname, string text)
+        public Message(string lastname, string firstname, string text, int Id)
         {
+            this.Id = Id;
             this.lastname = lastname;
             this.firstname = firstname;
             this.text = text;
 
+        }
+
+        public override string ToString()
+        {
+            return text;
         }
 
         

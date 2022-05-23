@@ -17,11 +17,15 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         private ContextMenuStrip listboxContextMenu;
         SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002");
         public mainform mainform;
+        public int selectedId;
         public chatpublic(mainform mainform)
         {
             InitializeComponent();
             this.mainform = mainform;
+            this.selectedId = -1;
         }
+
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -29,16 +33,15 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             listBox1.ContextMenuStrip = listboxContextMenu;
             con.Open();
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
-            MessageBox.Show("test");
             while (reader.Read()) 
             {
+                int Id = Convert.ToInt32(reader["Id_ChatPublic"]);
                 string lastname = Convert.ToString(reader["Nom"]);
                 string firstname = Convert.ToString(reader["Prenom"]);
-                string text = Convert.ToString(reader["Message"]);
-                MessageBox.Show(text);
-                Message message = new Message(lastname,firstname,text);
+                string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
+                Message message = new Message(lastname,firstname,text,Id);
             listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
@@ -46,6 +49,26 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             con.Close();
 
             //InitTimer();
+
+        }
+
+        public void afficherchat()
+        {
+            listBox1.Items.Clear();
+
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                int Id = Convert.ToInt32(reader["Id_ChatPublic"]);
+                string lastname = Convert.ToString(reader["Nom"]);
+                string firstname = Convert.ToString(reader["Prenom"]);
+                string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
+                Message message = new Message(lastname, firstname, text, Id);
+                listBox1.Items.Add(message);
+            }
+            listBox1.TopIndex = listBox1.Items.Count - 1;
+
 
         }
 
@@ -121,8 +144,41 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         {
             //clear the menu and add custom items
             listboxContextMenu.Items.Clear();
-            listboxContextMenu.Items.Add(string.Format("Edit - {0}", listBox1.SelectedItem.ToString()));
+            listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
+            listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+
+            listboxContextMenu.ItemClicked +=new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
         }
+
+        private void listboxContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            con.Open();
+            //throw new NotImplementedException();
+
+            
+
+            switch (e.ClickedItem.Name.ToString())
+            {
+                case "Modifier":
+
+                break;
+
+                case "Supprimer":
+                    SqlCommand cmd = new SqlCommand("DELETE FROM tblchatpublic WHERE Id_ChatPublic = @Id", con);
+                    cmd.Parameters.AddWithValue("@Id", selectedId);
+                    cmd.ExecuteNonQuery();
+                    afficherchat();
+                    break;
+            }
+            con.Close();
+        }
+
+
+
+
+
+        //MessageBox.Show(e.ClickedItem.Name.ToString());
+
 
         private void listBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -135,11 +191,28 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                     listboxContextMenu.Show();
                 }
             }
+                        
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show(listBox1.SelectedItem.ToString());
+            ListBox lb = (ListBox)sender;
+            Message message = (Message)lb.Items[lb.SelectedIndex];
+            selectedId = message.Id;
         }
+
+
+        //MessageBox.Show(e.ClickedItem.Name.ToString());
+
+
+
+
+        /*MessageBox.Show("test");
+        ListBox lb = (ListBox)sender;
+        Message user = (Message)lb.Items[lb.SelectedIndex];
+        MessageBox.Show(user.Id.ToString());*/
+
+
+
     }
 }
