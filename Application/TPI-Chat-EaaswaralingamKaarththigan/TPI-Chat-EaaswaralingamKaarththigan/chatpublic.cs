@@ -23,6 +23,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             InitializeComponent();
             this.mainform = mainform;
             this.selectedId = -1;
+            
         }
 
         
@@ -33,15 +34,17 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             listBox1.ContextMenuStrip = listboxContextMenu;
             con.Open();
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
+            MessageBox.Show(mainform.user.user);
             while (reader.Read()) 
             {
                 int Id = Convert.ToInt32(reader["Id_ChatPublic"]);
                 string lastname = Convert.ToString(reader["Nom"]);
                 string firstname = Convert.ToString(reader["Prenom"]);
+                string username = Convert.ToString(reader["Pseudonyme"]);
                 string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
-                Message message = new Message(lastname,firstname,text,Id);
+                Message message = new Message(lastname,firstname,text,Id,username);
             listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
@@ -56,15 +59,16 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         {
             listBox1.Items.Clear();
 
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
                 int Id = Convert.ToInt32(reader["Id_ChatPublic"]);
                 string lastname = Convert.ToString(reader["Nom"]);
                 string firstname = Convert.ToString(reader["Prenom"]);
+                string username = Convert.ToString(reader["Pseudonyme"]);
                 string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
-                Message message = new Message(lastname, firstname, text, Id);
+                Message message = new Message(lastname, firstname, text, Id, username);
                 listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
@@ -103,24 +107,29 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void btnEnvoyer_Click(object sender, EventArgs e)
         {
-            
             con.Open();
-            SqlCommand cmd = new SqlCommand("insert into tblchatpublic values(@Id_Employe,@Nom_ChatPublic,@Message,@Date_envoi_message)", con);
-
-            cmd.Parameters.AddWithValue("@Id_Employe", 2);
-            cmd.Parameters.AddWithValue("@Nom_ChatPublic", "Test1");
-            cmd.Parameters.AddWithValue("@Message", txtMessage.Text);
-            cmd.Parameters.AddWithValue("@Date_envoi_message", DateTime.Now);
-            cmd.ExecuteNonQuery();
-
-            listBox1.Items.Clear();
-            SqlCommand cmdd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
+            SqlCommand cmdd = new SqlCommand("select tblemployes.Id_Employe from tblemployes INNER JOIN tblcompte ON tblemployes.Id_Employe = tblcompte.Id_Employe WHERE tblcompte.Pseudonyme = @username", con);
+            cmdd.Parameters.AddWithValue("@username", mainform.user.user);
             SqlDataReader reader = cmdd.ExecuteReader();
             while (reader.Read())
             {
-                listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
+                
             }
-            listBox1.TopIndex = listBox1.Items.Count - 1;
+           
+            con.Close();
+            con.Open();
+                SqlCommand cmd = new SqlCommand("insert into tblchatpublic values(@Id_Employe,@Nom_ChatPublic,@Message,@Date_envoi_message)", con);
+                int test = 1;
+                cmd.Parameters.AddWithValue("@Id_Employe", mainform.user.id);
+                cmd.Parameters.AddWithValue("@Nom_ChatPublic", "Test1");
+                cmd.Parameters.AddWithValue("@Message", txtMessage.Text);
+                cmd.Parameters.AddWithValue("@Date_envoi_message", DateTime.Now);
+            
+            cmd.ExecuteNonQuery();
+            con.Close();
+            con.Open();
+            listBox1.Items.Clear();
+            afficherchat();
             con.Close();
 
             txtMessage.Text = string.Empty;

@@ -12,6 +12,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 {
     public partial class mainform : Form
     {
+        public utilisateur user;
         public mainform()
         {
             InitializeComponent();
@@ -45,6 +46,16 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         private void mainform_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        
+        public void SetUser(utilisateur user)
+        {
+            this.user = user;
         }
     }
 }

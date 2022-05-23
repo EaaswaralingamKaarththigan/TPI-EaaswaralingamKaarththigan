@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPI_Chat_EaaswaralingamKaarththigan
 {
-    class utilisateur
+    public class utilisateur
     {
         public string lastname;
         public string firstname;
@@ -18,6 +18,10 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             this.id = id;
             this.user = user;
         }
-                
+
+        public override string ToString()
+        {
+            return user;
+        }
     }
 }
