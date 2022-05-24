@@ -20,6 +20,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public int selectedId;
         public int selectEmployId;
         public int lastmessageid;
+        public int idtypecompte;
         
         public chatpublic(mainform mainform)
         {
@@ -39,7 +40,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
             
             con.Open();
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme,tblcompte.Id_TypeCompte from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read()) 
             {
@@ -49,7 +50,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 string username = Convert.ToString(reader["Pseudonyme"]);
                 string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
                 int idemploye = Convert.ToInt32(reader["Id_Employe"]);
-                Message message = new Message(lastname, firstname, text, Id, username, idemploye);
+                int idtypecompte = Convert.ToInt32(reader["Id_TypeCompte"]);
+                Message message = new Message(lastname, firstname, text, Id, username, idemploye, idtypecompte);
                 listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
@@ -70,7 +72,6 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             con.Close();
             int test1 = listBox1.Items.Count - 1;
             int test2 = test1 + 1;
-            string test3 = listBox1.Items[listBox1.Items.Count - 1].ToString();
             //int test2 = Convert.ToInt32(test1);
             if (test2 != lastmessageid)
             {
@@ -84,7 +85,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             con.Open();
             listBox1.Items.Clear();
 
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
+            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme,tblcompte.Id_TypeCompte from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -94,7 +95,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 string username = Convert.ToString(reader["Pseudonyme"]);
                 string text = string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]);
                 int idemploye = Convert.ToInt32(reader["Id_Employe"]);
-                Message message = new Message(lastname, firstname, text, Id, username, idemploye);
+                int idtypecompte = Convert.ToInt32(reader["Id_TypeCompte"]);
+                Message message = new Message(lastname, firstname, text, Id, username, idemploye, idtypecompte);
                 listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
@@ -110,7 +112,21 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         public void opencontextmenu()
         {
-            if (selectEmployId == mainform.user.id)
+            if (mainform.user.idtypecompte == 2 || mainform.user.idtypecompte == 3)
+            {
+                if(mainform.user.id == selectEmployId)
+                {
+                    listboxContextMenu.Items.Clear();
+                    listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
+                    listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+                }
+                else
+                {
+                    listboxContextMenu.Items.Clear();
+                    listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+                }
+            }
+            else if (selectEmployId == mainform.user.id)
             {
 
                 listboxContextMenu.Items.Clear();
@@ -238,6 +254,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             Message message = (Message)lb.Items[lb.SelectedIndex];
             selectedId = message.Id;
             selectEmployId = message.idemploye;
+            idtypecompte = message.idtypecompte;
             opencontextmenu();
         }
 

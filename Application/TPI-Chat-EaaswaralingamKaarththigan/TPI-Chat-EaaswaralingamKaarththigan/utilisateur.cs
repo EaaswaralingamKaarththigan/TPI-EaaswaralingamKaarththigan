@@ -11,12 +11,14 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public string lastname;
         public string firstname;
         public string user;
+        public int idtypecompte;
         public int id;
 
-        public utilisateur(int id, string user)
+        public utilisateur(int id, string user, int idtypecompte)
         {
             this.id = id;
             this.user = user;
+            this.idtypecompte = idtypecompte;
         }
 
         public override string ToString()

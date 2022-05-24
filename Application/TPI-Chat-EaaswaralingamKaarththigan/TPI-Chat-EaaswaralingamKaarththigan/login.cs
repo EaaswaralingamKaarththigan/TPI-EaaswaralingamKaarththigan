@@ -32,7 +32,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 SqlConnection con = new SqlConnection(@"Data Source=sc-c214-pc20\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002"); // making connection 
                 con.Open();
                 SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM tblcompte WHERE Pseudonyme='" + txtUsername.Text + "' AND MotDePasse='" + txtPassword.Text + "'", con);
-                SqlCommand cmd = new SqlCommand("SELECT tblcompte.Pseudonyme,tblcompte.Id_Employe FROM tblcompte WHERE Pseudonyme='" + txtUsername.Text + "' AND MotDePasse='" + txtPassword.Text + "'", con);
+                SqlCommand cmd = new SqlCommand("SELECT tblcompte.Pseudonyme,tblcompte.Id_Employe,tblcompte.Id_TypeCompte FROM tblcompte WHERE Pseudonyme='" + txtUsername.Text + "' AND MotDePasse='" + txtPassword.Text + "'", con);
                
                     DataTable virtualTable = new DataTable();
                     sda.Fill(virtualTable);
@@ -42,8 +42,9 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                     while (reader.Read())
                     {
                         int id = Convert.ToInt32(reader["Id_Employe"]);
+                        int idtypecompte = Convert.ToInt32(reader["Id_TypeCompte"]);
                         string user = Convert.ToString(reader["Pseudonyme"]);
-                        utilisateur loggedUser = new utilisateur(id, user);
+                        utilisateur loggedUser = new utilisateur(id, user, idtypecompte);
                         this.Hide();
 
                         mainform form = new mainform();
