@@ -38,7 +38,6 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             con.Open();
             SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
             SqlDataReader reader = cmd.ExecuteReader();
-            MessageBox.Show(mainform.user.user);
             while (reader.Read()) 
             {
                 int Id = Convert.ToInt32(reader["Id_ChatPublic"]);
@@ -53,18 +52,21 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             listBox1.TopIndex = listBox1.Items.Count - 1;
             
             con.Close();
-            if (selectEmployId == mainform.user.id)
+            string testemployid = Convert.ToString(selectEmployId);
+            
+            /*if(mainform.user.id == selectEmployId)
             {
 
 
                 listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
                 listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
+                listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
             }
             else
             {
                 listboxContextMenu.Items.Clear();
-            }
-            listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
+            }*/
+            
 
             //InitTimer();
 
@@ -100,19 +102,21 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         public void opencontextmenu()
         {
-            //if (selectEmployId == mainform.user.id)
-            //{
+            if (selectEmployId == mainform.user.id)
+            {
 
                 listboxContextMenu.Items.Clear();
                 listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
                 listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
-            //}
-            /*else
+                
+            }
+            else
             {
                 listboxContextMenu.Items.Clear();
-            }*/
-
+            }
             listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
+
+
         }
 
         public void refreshchat(object sender, EventArgs e)
@@ -207,10 +211,12 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         {
             if (e.Button == MouseButtons.Right)
             {
+                
                 //select the item under the mouse pointer
                 listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
                 if (listBox1.SelectedIndex != -1)
                 {
+                    //if(selectEmployId == )
                     listboxContextMenu.Show();
                 }
             }
@@ -223,6 +229,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             Message message = (Message)lb.Items[lb.SelectedIndex];
             selectedId = message.Id;
             selectEmployId = message.idemploye;
+            opencontextmenu();
         }
 
 

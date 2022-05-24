@@ -49,7 +49,6 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                         mainform form = new mainform();
                         form.SetUser(loggedUser);
                         form.Show();
-                        MessageBox.Show(user);
                     }
                     }
                     else
