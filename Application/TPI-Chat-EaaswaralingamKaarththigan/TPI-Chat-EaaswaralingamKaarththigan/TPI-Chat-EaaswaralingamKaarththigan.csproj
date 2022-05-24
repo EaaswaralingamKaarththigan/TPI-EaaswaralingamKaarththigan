@@ -94,6 +94,7 @@
     <Compile Include="gestionadmin.Designer.cs">
       <DependentUpon>gestionadmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lastmessage.cs" />
     <Compile Include="login.cs">
       <SubType>Form</SubType>
     </Compile>

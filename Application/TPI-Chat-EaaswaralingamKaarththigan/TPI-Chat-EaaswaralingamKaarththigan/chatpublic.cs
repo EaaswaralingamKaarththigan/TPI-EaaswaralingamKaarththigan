@@ -19,6 +19,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public mainform mainform;
         public int selectedId;
         public int selectEmployId;
+        public int lastmessageid;
+        
         public chatpublic(mainform mainform)
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            MessageBox.Show("Version2");
             listboxContextMenu = new ContextMenuStrip();
             listBox1.ContextMenuStrip = listboxContextMenu;
             
@@ -50,30 +53,35 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
-            
             con.Close();
-            string testemployid = Convert.ToString(selectEmployId);
+
             
-            /*if(mainform.user.id == selectEmployId)
+            InitTimer();
+            
+        }
+
+        public void checknewmessage(object sender, EventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(Id_ChatPublic) FROM tblchatpublic", con);
+            Int32 count = (Int32)cmd.ExecuteScalar();
+            lastmessageid = count;
+           
+            con.Close();
+            int test1 = listBox1.Items.Count - 1;
+            int test2 = test1 + 1;
+            string test3 = listBox1.Items[listBox1.Items.Count - 1].ToString();
+            //int test2 = Convert.ToInt32(test1);
+            if (test2 != lastmessageid)
             {
-
-
-                listboxContextMenu.Items.Add("Modifier").Name = "Modifier";
-                listboxContextMenu.Items.Add("Supprimer").Name = "Supprimer";
-                listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
+                test2 = lastmessageid;
+                afficherchat();
             }
-            else
-            {
-                listboxContextMenu.Items.Clear();
-            }*/
-            
-
-            //InitTimer();
-
         }
 
         public void afficherchat()
         {
+            con.Open();
             listBox1.Items.Clear();
 
             SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_ChatPublic,tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom,tblemployes.Id_Employe,tblcompte.Pseudonyme from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe INNER JOIN tblcompte on tblchatpublic.Id_Employe = tblcompte.Id_Employe", con);
@@ -90,7 +98,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 listBox1.Items.Add(message);
             }
             listBox1.TopIndex = listBox1.Items.Count - 1;
-
+            con.Close();
 
         }
 
@@ -137,8 +145,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public void InitTimer()
         {
             timer1 = new Timer();
-            timer1.Tick += new EventHandler(refreshchat);
-            timer1.Interval = 2000; // in miliseconds
+            timer1.Tick += new EventHandler(checknewmessage);
+            timer1.Interval = 200; // in miliseconds
             timer1.Start();
         }
 
@@ -156,8 +164,9 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             con.Close();
             con.Open();
             listBox1.Items.Clear();
-            afficherchat();
             con.Close();
+            afficherchat();
+            
 
             txtMessage.Text = string.Empty;
 
@@ -194,7 +203,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                     SqlCommand cmd = new SqlCommand("DELETE FROM tblchatpublic WHERE Id_ChatPublic = @Id", con);
                     cmd.Parameters.AddWithValue("@Id", selectedId);
                     cmd.ExecuteNonQuery();
-                    afficherchat();
+                    //afficherchat();
                     break;
             }
             con.Close();

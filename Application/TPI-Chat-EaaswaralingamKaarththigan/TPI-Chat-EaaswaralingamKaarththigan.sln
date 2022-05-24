@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPI-Chat-EaaswaralingamKaarththigan", "TPI-Chat-EaaswaralingamKaarththigan\TPI-Chat-EaaswaralingamKaarththigan.csproj", "{21CCF982-5C79-4C1E-8DA0-5FFB3A363C3F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupChat", "SetupChat\SetupChat.vdproj", "{4DD00055-A6B6-411F-9946-13EF5EA77B70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{21CCF982-5C79-4C1E-8DA0-5FFB3A363C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21CCF982-5C79-4C1E-8DA0-5FFB3A363C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21CCF982-5C79-4C1E-8DA0-5FFB3A363C3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DD00055-A6B6-411F-9946-13EF5EA77B70}.Debug|Any CPU.ActiveCfg = Release
+		{4DD00055-A6B6-411F-9946-13EF5EA77B70}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
