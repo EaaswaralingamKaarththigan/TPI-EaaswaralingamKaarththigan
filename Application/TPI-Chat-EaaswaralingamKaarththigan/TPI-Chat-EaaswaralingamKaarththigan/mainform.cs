@@ -23,7 +23,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         public void discprivee()                                                                                                                    // Fonction pour afficher le chat privé
         {
-            chatprivee screenschatprivee = new chatprivee(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            chatprivetest screenschatprivee = new chatprivetest(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             this.panel1.Controls.Add(screenschatprivee);
             screenschatprivee.Show();
         }

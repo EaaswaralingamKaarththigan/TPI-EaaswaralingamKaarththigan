@@ -82,11 +82,29 @@
     <Compile Include="chatprivee.Designer.cs">
       <DependentUpon>chatprivee.cs</DependentUpon>
     </Compile>
+    <Compile Include="chatprivetest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="chatprivetest.Designer.cs">
+      <DependentUpon>chatprivetest.cs</DependentUpon>
+    </Compile>
     <Compile Include="chatpublic.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="chatpublic.Designer.cs">
       <DependentUpon>chatpublic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="creationcanalprive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="creationcanalprive.Designer.cs">
+      <DependentUpon>creationcanalprive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEmploye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmploye.Designer.cs">
+      <DependentUpon>FormEmploye.cs</DependentUpon>
     </Compile>
     <Compile Include="gestionadmin.cs">
       <SubType>Form</SubType>
@@ -120,8 +138,17 @@
     <EmbeddedResource Include="chatprivee.resx">
       <DependentUpon>chatprivee.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="chatprivetest.resx">
+      <DependentUpon>chatprivetest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="chatpublic.resx">
       <DependentUpon>chatpublic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="creationcanalprive.resx">
+      <DependentUpon>creationcanalprive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEmploye.resx">
+      <DependentUpon>FormEmploye.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gestionadmin.resx">
       <DependentUpon>gestionadmin.cs</DependentUpon>
