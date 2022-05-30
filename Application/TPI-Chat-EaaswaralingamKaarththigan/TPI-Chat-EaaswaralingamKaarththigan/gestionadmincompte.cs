@@ -11,11 +11,11 @@ using System.Data.SqlClient;
 
 namespace TPI_Chat_EaaswaralingamKaarththigan
 {
-    public partial class gestionadmin : Form
+    public partial class gestionadmincompte : Form
     {
         SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002"); // making connection 
         public int IdEmploy;
-        public gestionadmin()
+        public gestionadmincompte()
         {
             InitializeComponent();
         }
@@ -30,10 +30,10 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             if (IdEmploy != 0)
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("update tblemploye set Nom = @Nom, Prenom = @Prenom where Id_Employe = @IdEmploy", con);
-                cmd.Parameters.AddWithValue("@Nom", txtNom.Text.Trim());
-                cmd.Parameters.AddWithValue("@Prenom", txtPrenom.Text.Trim());
-                cmd.Parameters.AddWithValue("@IdEmploy", IdEmploy);
+                SqlCommand cmd = new SqlCommand("update tblcompteemploye set Id_Employe = @IdEmploye, Pseudonyme = @Pseudonyme, MotDePasse = @MotDePasse where Id_Employe = @IdEmploy", con);
+                cmd.Parameters.AddWithValue("@IdEmploye", Convert.ToInt32(txtIdemploye.Text.Trim()));
+                cmd.Parameters.AddWithValue("@Pseudonyme", txtPseudo.Text.Trim());
+                cmd.Parameters.AddWithValue("@MotDePasse", txtMotdepasse.Text.Trim());
                 cmd.ExecuteNonQuery();
                 con.Close();
                 clear();
@@ -42,9 +42,10 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             else
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("insert into tblemploye values(@Nom,@Prenom)", con);
-                cmd.Parameters.AddWithValue("@Nom", txtNom.Text.Trim());
-                cmd.Parameters.AddWithValue("@Prenom", txtPrenom.Text.Trim());
+                SqlCommand cmd = new SqlCommand("insert into tblcompteemploye values(@Id_Employe,@Pseudonyme,@MotDePasse)", con);
+                cmd.Parameters.AddWithValue("@Id_Employe", Convert.ToInt32(txtIdemploye.Text.Trim()));
+                cmd.Parameters.AddWithValue("@Pseudonyme", txtPseudo.Text.Trim());
+                cmd.Parameters.AddWithValue("@MotDePasse", txtMotdepasse.Text.Trim());
                 cmd.ExecuteNonQuery();
                 con.Close();
                 clear();
@@ -60,7 +61,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         void afficherliste()
         {
             con.Open();
-            SqlDataAdapter cmd = new SqlDataAdapter("select Id_Employe,Nom,Prenom from tblemploye", con);
+            SqlDataAdapter cmd = new SqlDataAdapter("select Id_Compte,Id_Employe,Pseudonyme,MotDePasse from tblcompteemploye", con);
             DataTable employeTable = new DataTable();
             cmd.Fill(employeTable);
             employeGridView.DataSource = employeTable;
@@ -70,7 +71,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         void clear()
         {
-            txtNom.Text = txtPrenom.Text = "";
+            txtIdemploye.Text = txtPseudo.Text = "";
             IdEmploy = 0;
             btnAjouter.Text = "Ajouter";
             btnAjouter.BackColor = Color.White;
@@ -78,10 +79,11 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void employeGridView_DoubleClick(object sender, EventArgs e)
         {
-            if(employeGridView.CurrentCell.RowIndex != -1)
+            if (employeGridView.CurrentCell.RowIndex != -1)
             {
-                txtNom.Text = employeGridView.CurrentRow.Cells[1].Value.ToString();
-                txtPrenom.Text = employeGridView.CurrentRow.Cells[2].Value.ToString();
+                txtIdemploye.Text = employeGridView.CurrentRow.Cells[1].Value.ToString();
+                txtPseudo.Text = employeGridView.CurrentRow.Cells[2].Value.ToString();
+                txtMotdepasse.Text = employeGridView.CurrentRow.Cells[3].Value.ToString();
                 IdEmploy = Convert.ToInt32(employeGridView.CurrentRow.Cells[0].Value.ToString());
                 btnAjouter.Text = "Modifier";
                 btnAjouter.BackColor = Color.Yellow;

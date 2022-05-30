@@ -13,6 +13,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 {
     public partial class login : Form
     {
+        SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002"); // making connection 
         public login()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
             else
             {
-                SqlConnection con = new SqlConnection(@"Data Source=.;Initial Catalog=TPI;User ID=sa;Password=Pa$$w0rd"); // making connection 
+                
                 con.Open();                                                                                                 // Ouverture de la connexion à la base de données
                 SqlDataAdapter sda = new SqlDataAdapter("SELECT COUNT(*) FROM tblcompteemploye WHERE Pseudonyme='" + txtUsername.Text + "' AND MotDePasse='" + txtPassword.Text + "'", con);                                                                        // Cette commande permet de compter le nombre de ligne dans la table "compteemploye" qui correspont au nom d'utilisateur et mot de passe qu'a entré l'utilisateur
                 SqlCommand cmd = new SqlCommand("SELECT tblcompteemploye.Pseudonyme,tblcompteemploye.Id_Employe,tblcompteemploye.Id_TypeCompte FROM tblcompteemploye WHERE Pseudonyme='" + txtUsername.Text + "' AND MotDePasse='" + txtPassword.Text + "'", con);  // Cette commande permet de récupérer différentes information du compte avec lequel l'utilisateur s'est connecté

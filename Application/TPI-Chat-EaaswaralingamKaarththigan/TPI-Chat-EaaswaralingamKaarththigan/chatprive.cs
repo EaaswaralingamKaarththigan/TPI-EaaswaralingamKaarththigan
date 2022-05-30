@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace TPI_Chat_EaaswaralingamKaarththigan
 {
-    public partial class chatprivetest : Form
+    public partial class chatprive : Form
     {
-        SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=TPI;User ID=sa;Password=Pa$$w0rd");
+        SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002");
         private Timer timer1;                                                           // Servira dans la fonction "InitTimer"                                     
         private ContextMenuStrip listboxContextMenu;
         public mainform mainform;
@@ -23,7 +23,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public int idtypecompte;
         public int idcanal = 0;
 
-        public chatprivetest(mainform mainform)
+        public chatprive(mainform mainform)
         {
             InitializeComponent();
             this.mainform = mainform;
@@ -64,7 +64,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 txtMessage.Enabled = true;
                 listBox1.Enabled = true;
                 btnEnvoyer.Enabled = true;
-                InitTimer();
+                //InitTimer();
             }
         }
 
@@ -90,11 +90,12 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             lastmessageid = count;
 
             con.Close();
-            int NombreMsgLstbox = listBox1.Items.Count;
+            int NombreMsgLstbox = listBox1.Items.Count - 1;
             //int test2 = Convert.ToInt32(test1);
-            if (NombreMsgLstbox != lastmessageid)
+            int nbr = NombreMsgLstbox + 1;
+            if (nbr != lastmessageid)
             {
-                NombreMsgLstbox = lastmessageid;
+                nbr = lastmessageid;
                 afficherchat();
             }
         }

@@ -76,17 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="chatprivee.cs">
+    <Compile Include="chatprive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="chatprivee.Designer.cs">
-      <DependentUpon>chatprivee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="chatprivetest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="chatprivetest.Designer.cs">
-      <DependentUpon>chatprivetest.cs</DependentUpon>
+    <Compile Include="chatprive.Designer.cs">
+      <DependentUpon>chatprive.cs</DependentUpon>
     </Compile>
     <Compile Include="chatpublic.cs">
       <SubType>Form</SubType>
@@ -100,17 +94,17 @@
     <Compile Include="creationcanalprive.Designer.cs">
       <DependentUpon>creationcanalprive.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormEmploye.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEmploye.Designer.cs">
-      <DependentUpon>FormEmploye.cs</DependentUpon>
-    </Compile>
     <Compile Include="gestionadmin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="gestionadmin.Designer.cs">
       <DependentUpon>gestionadmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gestionadmincompte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gestionadmincompte.Designer.cs">
+      <DependentUpon>gestionadmincompte.cs</DependentUpon>
     </Compile>
     <Compile Include="Lastmessage.cs" />
     <Compile Include="login.cs">
@@ -135,11 +129,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utilisateur.cs" />
-    <EmbeddedResource Include="chatprivee.resx">
-      <DependentUpon>chatprivee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="chatprivetest.resx">
-      <DependentUpon>chatprivetest.cs</DependentUpon>
+    <EmbeddedResource Include="chatprive.resx">
+      <DependentUpon>chatprive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="chatpublic.resx">
       <DependentUpon>chatpublic.cs</DependentUpon>
@@ -147,11 +138,11 @@
     <EmbeddedResource Include="creationcanalprive.resx">
       <DependentUpon>creationcanalprive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEmploye.resx">
-      <DependentUpon>FormEmploye.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="gestionadmin.resx">
       <DependentUpon>gestionadmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gestionadmincompte.resx">
+      <DependentUpon>gestionadmincompte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>

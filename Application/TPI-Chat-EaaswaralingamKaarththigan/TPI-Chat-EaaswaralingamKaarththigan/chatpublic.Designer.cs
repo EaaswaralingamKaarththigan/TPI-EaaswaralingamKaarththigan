@@ -36,6 +36,8 @@
             this.btnDiscPrivees = new System.Windows.Forms.Button();
             this.btnParametres = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnGestionadmin = new System.Windows.Forms.Button();
+            this.btnGestioncol = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,10 +46,9 @@
             this.btnEnvoyer.BackColor = System.Drawing.Color.Snow;
             this.btnEnvoyer.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnEnvoyer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEnvoyer.Location = new System.Drawing.Point(709, 521);
-            this.btnEnvoyer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEnvoyer.Location = new System.Drawing.Point(532, 423);
             this.btnEnvoyer.Name = "btnEnvoyer";
-            this.btnEnvoyer.Size = new System.Drawing.Size(112, 52);
+            this.btnEnvoyer.Size = new System.Drawing.Size(84, 42);
             this.btnEnvoyer.TabIndex = 1;
             this.btnEnvoyer.Text = "Envoyer";
             this.btnEnvoyer.UseVisualStyleBackColor = false;
@@ -55,31 +56,28 @@
             // 
             // txtMessage
             // 
-            this.txtMessage.Location = new System.Drawing.Point(300, 489);
-            this.txtMessage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMessage.Location = new System.Drawing.Point(225, 397);
             this.txtMessage.Name = "txtMessage";
-            this.txtMessage.Size = new System.Drawing.Size(913, 22);
+            this.txtMessage.Size = new System.Drawing.Size(686, 20);
             this.txtMessage.TabIndex = 2;
             this.txtMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMessage_KeyPress);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(16, 66);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 54);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(256, 506);
+            this.dataGridView1.Size = new System.Drawing.Size(192, 411);
             this.dataGridView1.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(5, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(292, 48);
+            this.label1.Size = new System.Drawing.Size(235, 39);
             this.label1.TabIndex = 5;
             this.label1.Text = "Canaux publics";
             // 
@@ -89,10 +87,9 @@
             this.btnDiscPubliques.Enabled = false;
             this.btnDiscPubliques.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDiscPubliques.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-            this.btnDiscPubliques.Location = new System.Drawing.Point(16, 590);
-            this.btnDiscPubliques.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDiscPubliques.Location = new System.Drawing.Point(12, 479);
             this.btnDiscPubliques.Name = "btnDiscPubliques";
-            this.btnDiscPubliques.Size = new System.Drawing.Size(395, 71);
+            this.btnDiscPubliques.Size = new System.Drawing.Size(296, 58);
             this.btnDiscPubliques.TabIndex = 6;
             this.btnDiscPubliques.Text = "Discussions publiques";
             this.btnDiscPubliques.UseVisualStyleBackColor = false;
@@ -102,10 +99,9 @@
             this.btnDiscPrivees.BackColor = System.Drawing.Color.White;
             this.btnDiscPrivees.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDiscPrivees.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-            this.btnDiscPrivees.Location = new System.Drawing.Point(419, 590);
-            this.btnDiscPrivees.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDiscPrivees.Location = new System.Drawing.Point(314, 479);
             this.btnDiscPrivees.Name = "btnDiscPrivees";
-            this.btnDiscPrivees.Size = new System.Drawing.Size(395, 71);
+            this.btnDiscPrivees.Size = new System.Drawing.Size(296, 58);
             this.btnDiscPrivees.TabIndex = 7;
             this.btnDiscPrivees.Text = "Discussions privées";
             this.btnDiscPrivees.UseVisualStyleBackColor = false;
@@ -116,10 +112,9 @@
             this.btnParametres.BackColor = System.Drawing.Color.White;
             this.btnParametres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnParametres.Font = new System.Drawing.Font("Bahnschrift Condensed", 14F);
-            this.btnParametres.Location = new System.Drawing.Point(821, 590);
-            this.btnParametres.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnParametres.Location = new System.Drawing.Point(616, 479);
             this.btnParametres.Name = "btnParametres";
-            this.btnParametres.Size = new System.Drawing.Size(395, 71);
+            this.btnParametres.Size = new System.Drawing.Size(296, 58);
             this.btnParametres.TabIndex = 8;
             this.btnParametres.Text = "Paramètres";
             this.btnParametres.UseVisualStyleBackColor = false;
@@ -128,22 +123,48 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(300, 68);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBox1.Location = new System.Drawing.Point(225, 55);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(913, 404);
+            this.listBox1.Size = new System.Drawing.Size(686, 329);
             this.listBox1.TabIndex = 9;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
             // 
+            // btnGestionadmin
+            // 
+            this.btnGestionadmin.BackColor = System.Drawing.Color.Snow;
+            this.btnGestionadmin.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnGestionadmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestionadmin.Location = new System.Drawing.Point(782, 7);
+            this.btnGestionadmin.Name = "btnGestionadmin";
+            this.btnGestionadmin.Size = new System.Drawing.Size(97, 42);
+            this.btnGestionadmin.TabIndex = 10;
+            this.btnGestionadmin.Text = "Gestion Comptes Collaborateurs";
+            this.btnGestionadmin.UseVisualStyleBackColor = false;
+            this.btnGestionadmin.Click += new System.EventHandler(this.btnGestionadmin_Click);
+            // 
+            // btnGestioncol
+            // 
+            this.btnGestioncol.BackColor = System.Drawing.Color.Snow;
+            this.btnGestioncol.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnGestioncol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGestioncol.Location = new System.Drawing.Point(650, 7);
+            this.btnGestioncol.Name = "btnGestioncol";
+            this.btnGestioncol.Size = new System.Drawing.Size(109, 42);
+            this.btnGestioncol.TabIndex = 11;
+            this.btnGestioncol.Text = "Gestion Collaborateur";
+            this.btnGestioncol.UseVisualStyleBackColor = false;
+            this.btnGestioncol.Click += new System.EventHandler(this.btnGestioncol_Click);
+            // 
             // chatpublic
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Linen;
-            this.ClientSize = new System.Drawing.Size(1231, 676);
+            this.ClientSize = new System.Drawing.Size(923, 549);
             this.ControlBox = false;
+            this.Controls.Add(this.btnGestioncol);
+            this.Controls.Add(this.btnGestionadmin);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.btnParametres);
             this.Controls.Add(this.btnDiscPrivees);
@@ -153,7 +174,6 @@
             this.Controls.Add(this.txtMessage);
             this.Controls.Add(this.btnEnvoyer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "chatpublic";
@@ -177,6 +197,8 @@
         private System.Windows.Forms.Button btnDiscPrivees;
         private System.Windows.Forms.Button btnParametres;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnGestionadmin;
+        private System.Windows.Forms.Button btnGestioncol;
     }
 }
 

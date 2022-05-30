@@ -13,7 +13,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 {
     public partial class creationcanalprive : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=.;Initial Catalog=TPI;User ID=sa;Password=Pa$$w0rd"); // making connection 
+        SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002"); // making connection 
         public mainform mainform;
 
         public creationcanalprive(mainform mainform)

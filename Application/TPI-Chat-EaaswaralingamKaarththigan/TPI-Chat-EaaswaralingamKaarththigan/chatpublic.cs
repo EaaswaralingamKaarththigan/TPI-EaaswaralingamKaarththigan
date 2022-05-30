@@ -15,7 +15,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
     {
         private Timer timer1;
         private ContextMenuStrip listboxContextMenu;
-        SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=TPI;User ID=sa;Password=Pa$$w0rd");
+        SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002");
         public mainform mainform;
         public int selectedId;
         public int selectEmployId;
@@ -33,6 +33,16 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if(mainform.user.idtypecompte == 3)
+            {
+                btnGestionadmin.Visible = true;
+                btnGestioncol.Visible = true;
+            }
+            else
+            {
+                btnGestionadmin.Visible = false;
+                btnGestioncol.Visible = false;
+            }
             listboxContextMenu = new ContextMenuStrip();
             listBox1.ContextMenuStrip = listboxContextMenu;
             
@@ -141,21 +151,6 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         }
 
-        public void refreshchat(object sender, EventArgs e)
-        {
-            
-            listBox1.Items.Clear();
-            con.Open();
-            SqlCommand cmd = new SqlCommand("select tblchatpublic.Id_Employe,tblchatpublic.Message,tblchatpublic.Date_envoi_message,tblemployes.Nom,tblemployes.Prenom from tblchatpublic INNER JOIN tblemployes ON tblchatpublic.Id_Employe = tblemployes.Id_Employe", con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                listBox1.Items.Add(string.Format("{0} {1} : {2}", reader["Nom"], reader["Prenom"], reader["Message"]));
-            }
-            listBox1.TopIndex = listBox1.Items.Count - 1;
-            con.Close();
-        }
-
         public void InitTimer()
         {
             timer1 = new Timer();
@@ -227,7 +222,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
 
 
-        //MessageBox.Show(e.ClickedItem.Name.ToString());
+
 
 
         private void listBox1_MouseDown(object sender, MouseEventArgs e)
@@ -263,6 +258,18 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         {
             gestionadmin gestionadmin = new gestionadmin();
             gestionadmin.Show();
+        }
+
+        private void btnGestionadmin_Click(object sender, EventArgs e)
+        {
+            gestionadmincompte gestioncompteadm = new gestionadmincompte();
+            gestioncompteadm.Show();
+        }
+
+        private void btnGestioncol_Click(object sender, EventArgs e)
+        {
+            gestionadmin gestionadmincol = new gestionadmin();
+            gestionadmincol.Show();
         }
     }
 }
