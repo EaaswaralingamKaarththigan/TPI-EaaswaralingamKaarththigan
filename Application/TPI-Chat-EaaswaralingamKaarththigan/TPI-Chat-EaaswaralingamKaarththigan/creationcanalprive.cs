@@ -15,11 +15,13 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
     {
         SqlConnection con = new SqlConnection("Data Source=sc-c214-pc20\\instancekem;Initial Catalog=TPI;Persist Security Info=True;User ID=sa;Password=Kaarththigan2002"); // making connection 
         public mainform mainform;
+        public chatprive chatprivee;
 
-        public creationcanalprive(mainform mainform)
+        public creationcanalprive(mainform mainform, chatprive chatprivee)
         {
             InitializeComponent();
             this.mainform = mainform;
+            this.chatprivee = chatprivee;
         }
 
         private void btnCreerNvCanal_Click(object sender, EventArgs e)
@@ -28,7 +30,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             {
                 MessageBox.Show("Vous ne pouvez pas ajouter plusieurs fois la même personne");
             }
-            else { 
+            else 
+            { 
                     con.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO tblcanalchatprive values(@Createur,@Personne1,@Personne2)", con);
                     cmd.Parameters.AddWithValue("@Createur", mainform.user.id);
@@ -36,6 +39,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                     cmd.Parameters.AddWithValue("@Personne2", Convert.ToInt32(Perso2Txt.Text.Trim()));
                     cmd.ExecuteNonQuery();
                     con.Close();
+                    chatprivee.affichercanal();
             }
             
         }

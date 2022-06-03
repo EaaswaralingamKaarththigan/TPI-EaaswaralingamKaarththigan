@@ -17,11 +17,14 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         private Timer timer1;                                                           // Servira dans la fonction "InitTimer"                                     
         private ContextMenuStrip listboxContextMenu;
         public mainform mainform;
+        chatprive chatprivee;
         public int selectedId;
         public int selectEmployId;
         public int lastmessageid;
         public int idtypecompte;
         public int idcanal = 0;
+        public string nompersonneun = "";
+        public string nompersonnedeux = "";
 
         public chatprive(mainform mainform)
         {
@@ -60,16 +63,23 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
                 string idcanalgridview = canalpriveGridView.CurrentRow.Cells[0].Value.ToString();
                 idcanal = Convert.ToInt32(idcanalgridview);
 
+                con.Open();
+                SqlCommand cmd = new SqlCommand("select e1.Nom, e2.Prenom FROM tblcanalchatprive cp INNER JOIN tblemploye e1 ON e1.Id_Employe = cp.Personne2 INNER JOIN tblemploye e2 ON e2.Id_Employe = cp.Personne2 WHERE cp.Id_CanalChatPrive = @IdCanalChatPrive");
+                cmd.Parameters.AddWithValue("@IdCanalChatPrive", idcanal);
+                nompersonneun = Convert.ToString(cmd.ExecuteScalar());
+                
+                con.Close();
+
                 afficherchat();
                 txtMessage.Enabled = true;
                 listBox1.Enabled = true;
                 btnEnvoyer.Enabled = true;
-                //InitTimer();
+                InitTimer();
             }
         }
 
         // Fonction permettant d'afficher les différents canaux privés existant
-        void affichercanal()
+        public void affichercanal()
         {
             con.Open();
             SqlDataAdapter cmd = new SqlDataAdapter("select Id_CanalChatPrive from tblcanalchatprive WHERE Createur = @UtilisateurCo OR Personne2 = @UtilisateurCo OR Personne3 = @UtilisateurCo", con);
@@ -85,7 +95,8 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         public void checknewmessage(object sender, EventArgs e)
         {
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(Id_MessageChatPublic) FROM tblmessagechatpublic", con);
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(Id_MessageChatPrive) FROM tblmessagechatprive WHERE Id_CanalChatPrive = @IdCanalChatPrive", con);
+            cmd.Parameters.AddWithValue("@IdCanalChatPrive", idcanal);
             Int32 count = (Int32)cmd.ExecuteScalar();
             lastmessageid = count;
 
@@ -265,8 +276,14 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void btnNvCanal_Click(object sender, EventArgs e)
         {
-            creationcanalprive canalprive = new creationcanalprive(mainform);
+            creationcanalprive canalprive = new creationcanalprive(mainform, chatprivee);
             canalprive.Show();
+        }
+
+        private void btnDiscPubliques_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            mainform.discpubliques();
         }
     }
 }

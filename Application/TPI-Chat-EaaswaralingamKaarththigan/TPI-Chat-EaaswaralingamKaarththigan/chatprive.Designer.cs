@@ -83,9 +83,9 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             this.label1.Font = new System.Drawing.Font("Bahnschrift", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(5, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(235, 39);
+            this.label1.Size = new System.Drawing.Size(222, 39);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Canaux publics";
+            this.label1.Text = "Canaux privée";
             // 
             // btnDiscPubliques
             // 
@@ -98,6 +98,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             this.btnDiscPubliques.TabIndex = 6;
             this.btnDiscPubliques.Text = "Discussions publiques";
             this.btnDiscPubliques.UseVisualStyleBackColor = false;
+            this.btnDiscPubliques.Click += new System.EventHandler(this.btnDiscPubliques_Click);
             // 
             // btnDiscPrivees
             // 

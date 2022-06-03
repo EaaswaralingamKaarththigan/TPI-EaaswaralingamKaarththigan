@@ -27,9 +27,7 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             this.panel1.Controls.Add(screenschatprivee);
             screenschatprivee.Show();
         }
-        /// <summary>
-        /// 
-        /// </summary>
+        
         public void discpubliques()                                                                                                                 // Fonction pour afficher le chat public
         {
             chatpublic screenschatpublic = new chatpublic(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };

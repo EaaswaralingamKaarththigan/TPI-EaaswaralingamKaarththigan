@@ -43,6 +43,8 @@
             this.employeGridView = new System.Windows.Forms.DataGridView();
             this.txtMotdepasse = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtTypeCompte = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.employeGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,7 +124,7 @@
             // txtIdemploye
             // 
             this.txtIdemploye.Location = new System.Drawing.Point(70, 73);
-            this.txtIdemploye.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtIdemploye.Margin = new System.Windows.Forms.Padding(2);
             this.txtIdemploye.Name = "txtIdemploye";
             this.txtIdemploye.Size = new System.Drawing.Size(116, 20);
             this.txtIdemploye.TabIndex = 13;
@@ -130,7 +132,7 @@
             // txtPseudo
             // 
             this.txtPseudo.Location = new System.Drawing.Point(289, 73);
-            this.txtPseudo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPseudo.Margin = new System.Windows.Forms.Padding(2);
             this.txtPseudo.Name = "txtPseudo";
             this.txtPseudo.Size = new System.Drawing.Size(116, 20);
             this.txtPseudo.TabIndex = 15;
@@ -148,7 +150,7 @@
             // btnAjouter
             // 
             this.btnAjouter.Location = new System.Drawing.Point(30, 124);
-            this.btnAjouter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAjouter.Margin = new System.Windows.Forms.Padding(2);
             this.btnAjouter.Name = "btnAjouter";
             this.btnAjouter.Size = new System.Drawing.Size(82, 42);
             this.btnAjouter.TabIndex = 16;
@@ -159,7 +161,7 @@
             // btnSupprimer
             // 
             this.btnSupprimer.Location = new System.Drawing.Point(146, 124);
-            this.btnSupprimer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSupprimer.Margin = new System.Windows.Forms.Padding(2);
             this.btnSupprimer.Name = "btnSupprimer";
             this.btnSupprimer.Size = new System.Drawing.Size(82, 42);
             this.btnSupprimer.TabIndex = 17;
@@ -170,12 +172,13 @@
             // btnAnnuler
             // 
             this.btnAnnuler.Location = new System.Drawing.Point(266, 124);
-            this.btnAnnuler.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAnnuler.Margin = new System.Windows.Forms.Padding(2);
             this.btnAnnuler.Name = "btnAnnuler";
             this.btnAnnuler.Size = new System.Drawing.Size(82, 42);
             this.btnAnnuler.TabIndex = 18;
             this.btnAnnuler.Text = "Annuler";
             this.btnAnnuler.UseVisualStyleBackColor = true;
+            this.btnAnnuler.Click += new System.EventHandler(this.btnAnnuler_Click);
             // 
             // employeGridView
             // 
@@ -183,7 +186,7 @@
             this.employeGridView.AllowUserToDeleteRows = false;
             this.employeGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeGridView.Location = new System.Drawing.Point(22, 186);
-            this.employeGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.employeGridView.Margin = new System.Windows.Forms.Padding(2);
             this.employeGridView.Name = "employeGridView";
             this.employeGridView.RowHeadersWidth = 51;
             this.employeGridView.RowTemplate.Height = 24;
@@ -193,7 +196,7 @@
             // 
             // txtMotdepasse
             // 
-            this.txtMotdepasse.Location = new System.Drawing.Point(523, 73);
+            this.txtMotdepasse.Location = new System.Drawing.Point(741, 73);
             this.txtMotdepasse.Margin = new System.Windows.Forms.Padding(2);
             this.txtMotdepasse.Name = "txtMotdepasse";
             this.txtMotdepasse.Size = new System.Drawing.Size(116, 20);
@@ -202,19 +205,40 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(448, 73);
+            this.label5.Location = new System.Drawing.Point(666, 73);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 13);
             this.label5.TabIndex = 20;
             this.label5.Text = "Mot de passe";
             // 
-            // gestionadmincompte1
+            // txtTypeCompte
+            // 
+            this.txtTypeCompte.Location = new System.Drawing.Point(520, 73);
+            this.txtTypeCompte.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTypeCompte.Name = "txtTypeCompte";
+            this.txtTypeCompte.Size = new System.Drawing.Size(116, 20);
+            this.txtTypeCompte.TabIndex = 23;
+            this.txtTypeCompte.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(432, 73);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Type de compte";
+            // 
+            // gestionadmincompte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(928, 645);
+            this.Controls.Add(this.txtTypeCompte);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtMotdepasse);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.employeGridView);
@@ -230,7 +254,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Name = "gestionadmincompte1";
+            this.Name = "gestionadmincompte";
             this.Text = "Chat";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.employeGridView)).EndInit();
@@ -255,6 +279,8 @@
         private System.Windows.Forms.DataGridView employeGridView;
         private System.Windows.Forms.TextBox txtMotdepasse;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtTypeCompte;
+        private System.Windows.Forms.Label label4;
     }
 }
 

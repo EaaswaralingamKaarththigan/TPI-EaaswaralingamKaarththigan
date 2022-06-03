@@ -23,15 +23,21 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
         private void Form1_Load(object sender, EventArgs e)
         {
             afficherliste();
+            btnSupprimer.Enabled = false;
         }
 
         private void btnAjouter_Click(object sender, EventArgs e)
         {
-            if (IdEmploy != 0)
+            if(txtIdemploye.Text.Trim() == "" || txtTypeCompte.Text.Trim() == "" || txtPseudo.Text.Trim() == "" || txtMotdepasse.Text.Trim() == "")
+            {
+                MessageBox.Show("Remplissez tous les champs !!");
+            }
+            else if (IdEmploy != 0)
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("update tblcompteemploye set Id_Employe = @IdEmploye, Pseudonyme = @Pseudonyme, MotDePasse = @MotDePasse where Id_Employe = @IdEmploy", con);
+                SqlCommand cmd = new SqlCommand("update tblcompteemploye set Id_Employe = @IdEmploye, Id_TypeCompte = @TypeCompte, Pseudonyme = @Pseudonyme, MotDePasse = @MotDePasse where Id_Employe = @IdEmploy", con);
                 cmd.Parameters.AddWithValue("@IdEmploye", Convert.ToInt32(txtIdemploye.Text.Trim()));
+                cmd.Parameters.AddWithValue("@TypeCompte", Convert.ToInt32(txtTypeCompte.Text.Trim()));
                 cmd.Parameters.AddWithValue("@Pseudonyme", txtPseudo.Text.Trim());
                 cmd.Parameters.AddWithValue("@MotDePasse", txtMotdepasse.Text.Trim());
                 cmd.ExecuteNonQuery();
@@ -42,8 +48,9 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             else
             {
                 con.Open();
-                SqlCommand cmd = new SqlCommand("insert into tblcompteemploye values(@Id_Employe,@Pseudonyme,@MotDePasse)", con);
+                SqlCommand cmd = new SqlCommand("insert into tblcompteemploye values(@Id_Employe,@Id_TypeCompte,@Pseudonyme,@MotDePasse)", con);
                 cmd.Parameters.AddWithValue("@Id_Employe", Convert.ToInt32(txtIdemploye.Text.Trim()));
+                cmd.Parameters.AddWithValue("@Id_TypeCompte", Convert.ToInt32(txtTypeCompte.Text.Trim()));
                 cmd.Parameters.AddWithValue("@Pseudonyme", txtPseudo.Text.Trim());
                 cmd.Parameters.AddWithValue("@MotDePasse", txtMotdepasse.Text.Trim());
                 cmd.ExecuteNonQuery();
@@ -55,13 +62,23 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         private void btnSupprimer_Click(object sender, EventArgs e)
         {
-
+            if (IdEmploy != 0)
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("delete from tblcompteemploye where Id_Employe = @IdEmploy", con);
+                cmd.Parameters.AddWithValue("@IdEmploy", txtIdemploye.Text.Trim());
+                cmd.ExecuteNonQuery();
+                con.Close();
+                clear();
+                afficherliste();
+                btnSupprimer.Enabled = false;
+            }
         }
 
         void afficherliste()
         {
             con.Open();
-            SqlDataAdapter cmd = new SqlDataAdapter("select Id_Compte,Id_Employe,Pseudonyme,MotDePasse from tblcompteemploye", con);
+            SqlDataAdapter cmd = new SqlDataAdapter("select Id_Compte,Id_Employe,Id_TypeCompte,Pseudonyme,MotDePasse from tblcompteemploye", con);
             DataTable employeTable = new DataTable();
             cmd.Fill(employeTable);
             employeGridView.DataSource = employeTable;
@@ -71,10 +88,11 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
 
         void clear()
         {
-            txtIdemploye.Text = txtPseudo.Text = "";
+            txtIdemploye.Text = txtTypeCompte.Text = txtPseudo.Text = txtMotdepasse.Text = "";
             IdEmploy = 0;
             btnAjouter.Text = "Ajouter";
             btnAjouter.BackColor = Color.White;
+            btnSupprimer.Enabled = false;
         }
 
         private void employeGridView_DoubleClick(object sender, EventArgs e)
@@ -82,12 +100,24 @@ namespace TPI_Chat_EaaswaralingamKaarththigan
             if (employeGridView.CurrentCell.RowIndex != -1)
             {
                 txtIdemploye.Text = employeGridView.CurrentRow.Cells[1].Value.ToString();
-                txtPseudo.Text = employeGridView.CurrentRow.Cells[2].Value.ToString();
-                txtMotdepasse.Text = employeGridView.CurrentRow.Cells[3].Value.ToString();
+                txtTypeCompte.Text = employeGridView.CurrentRow.Cells[2].Value.ToString();
+                txtPseudo.Text = employeGridView.CurrentRow.Cells[3].Value.ToString();
+                txtMotdepasse.Text = employeGridView.CurrentRow.Cells[4].Value.ToString();
                 IdEmploy = Convert.ToInt32(employeGridView.CurrentRow.Cells[0].Value.ToString());
                 btnAjouter.Text = "Modifier";
                 btnAjouter.BackColor = Color.Yellow;
+                btnSupprimer.Enabled = true;
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAnnuler_Click(object sender, EventArgs e)
+        {
+            clear();
         }
     }
 }
